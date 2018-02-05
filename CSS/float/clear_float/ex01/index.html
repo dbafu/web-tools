@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style media="screen">
+
+    /* 子元素浮动后，会导致父元素高度塌陷，破坏布局，所以要清浮动。
+
+    清浮动方法1：
+    对浮动的父元素应用 overflow: hidden
+
+    不适用场景： 子元素的显示会超出父元素的范围的情景。 例如下拉或者弹出菜单。
+
+    清浮动方法2：
+    1 对浮动元素的父元素也应用浮动，
+    对浮动元素的父元素应用浮动，会使父元素紧紧包围所有子元素，无论子元素是否浮动，
+    为了恢复父元素宽度，需要设置父元素宽度为100%或者固定值，
+    同时需要对父元素后面跟随的元素应用清除浮动，已消除对跟随元素的影响。
+
+    不适用场景：靠自动外边距居中的元素
+
+    清浮动方法3：
+    在浮动元素的父元素最后添加非浮动的清除元素。
+
+    清浮动方法4：
+    在浮动元素的父元素应用 clearfix 代码：
+    .clearfix{
+
+    }
+    .clearfix:after{
+      content: '.';
+      display: block;
+      height: 0;
+      visibility: hidden;
+      clear: both;
+    }
+
+    这3个方法是最简单的清除浮动方法，清浮动还有更高级的方法。
+     */
+
+    /* section{
+      border: 1px solid #00f;
+      margin: 0 0 10px 0;
+      overflow: hidden;
+    } */
+    section{
+      border: 1px solid #00f;
+      margin: 0 0 10px 0;
+      float: left;
+      width: 100%;
+    }
+      img {float: left;}
+      p{
+        margin: 0;
+      }
+      footer{
+        border: 1px solid #f00;
+        clear: both;
+      }
+    </style>
+</head>
+<body>
+    <section>
+      <img src="rubber_duck.jpg" alt="">
+      <p>It's fine to float</p>
+    </section>
+    <footer>Here is the footer element thar run cross the bottom of the page.</footer>
+</body>
+</html>
