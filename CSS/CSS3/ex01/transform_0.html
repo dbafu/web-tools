@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Transform</title>
+    <style media="screen">
+      .outer{ width: 80%; height: 700px; margin: 100px auto; border: 1px solid #000;}
+      .trans_box {
+        display: inline-block;
+        margin: 10px;padding: 20px 10px;
+        border: 1px solid #beceeb;
+        background-color: #f0f3f9;
+      }
+      .trans_skew {
+        -webkit-transform: skew(35deg);
+        -ms-transform: skew(35deg);
+        transform: skew(35deg);
+      }
+      .trans_skew_x {
+        -webkit-transform: skewX(35deg);
+        -ms-transform: skewX(35deg);
+        transform: skewX(10deg);
+      }
+      .trans_skew_y {
+        -webkit-transform: skewY(35deg);
+        -ms-transform: skewY(35deg);
+        transform: skewY(35deg);
+      }
+      .trans_scale{
+        -webkit-transform: scale(1, 2);
+        -ms-transform: scale(1, 2);
+        transform: scale(1, 2);
+      }
+      .trans_rotate{
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+      .trans_translate{
+        -webkit-transform: translate(10px, 20px);
+        -ms-transform: translate(10px, 20px);
+        transform: translate(10px, 20px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer">
+      <span class="trans_box trans_skew">transform: skew(35deg)</span>
+      <span class="trans_box trans_skew_x">transform: trans_skew_x(35deg)</span>
+      <span class="trans_box trans_skew_y">transform: trans_skew_y(35deg)</span>
+      <span class="trans_box trans_scale">transform: scale(1, 2)</span>
+      <span class="trans_box trans_rotate">transform: rotate(45deg)</span>
+      <span class="trans_box trans_translate">translate(10px, 20px)</span>
+      <span class="trans_box trans_rotate_skew_scale_translate">transform:</span>
+    </div>
+  </body>
+</html>

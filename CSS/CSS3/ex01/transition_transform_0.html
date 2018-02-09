@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>transition and transform</title>
+    <style media="screen">
+      .trans_effect{
+        display:block;
+    line-height:100px;
+    width:100px;
+    background:#beceeb;
+    margin:30px auto;
+    text-align:center;
+        -webkit-transition: all 2s ease-in-out 1s;
+        -o-transition: all 2s ease-in-out 1s;
+        transition: all 4s ease-in-out 2s;
+      }
+      .trans_effect:hover{
+        -webkit-transform: rotate(720deg) scale(2, 2) ;
+        -ms-transform: rotate(720deg) scale(2, 2) ;
+        transform: rotate(760deg) scale(2, 2) ;
+      }
+      .outer{ width: 20%; height: 100px; margin: 500px auto; border: 1px solid #000;}
+    </style>
+  </head>
+  <body>
+    <div class="outer">
+      <p class="trans_effect">test css3 property</p>
+    </div>
+  </body>
+</html>

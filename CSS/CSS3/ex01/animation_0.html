@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Animation</title>
+    <style media="screen">
+      @-webkit-keyframes resize {
+        0% { padding: 0; }
+        50% { padding: 0 20px; background-color: rgba(190, 206, 235, 0.2); }
+        100% { padding: 0 100px;  background-color: rgba(190, 206, 235, 0.9);}
+      }
+      @-o-keyframes resize {
+        0% { padding: 0; }
+        50% { padding: 0 20px; background-color: rgba(190, 206, 235, 0.2); }
+        100% { p0-100 }
+      }
+      @-moz-keyframes resize {
+        0% { padding: 0; }
+        50% { padding: 0 20px; background-color: rgba(190, 206, 235, 0.2); }
+        100% { padding: 0 100px;  background-color: rgba(190, 206, 235, 0.9);}
+      }
+      @keyframes resize {
+        0% { padding: 0; }
+        50% { padding: 0 20px; background-color: rgba(190, 206, 235, 0.2); }
+        100% { padding: 0 100px;  background-color: rgba(190, 206, 235, 0.9);}
+      }
+      .test_box{
+        width: 100px;height: 100px;padding: 50px auto; border: 1px solid #000; background: #eee;
+      }
+      .anim_box:hover{
+        -webkit-animation: resize 1.5s alternate 1s ease-in-out;
+        animation: resize 1.5s alternate 1s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="anim_box test_box"> test_box </div>
+  </body>
+</html>

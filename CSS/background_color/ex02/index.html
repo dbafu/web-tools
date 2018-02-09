@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      /* 为元素盒子添加样式 */
+      div{
+        height: 150px;
+        width: 200px;
+        border: 1px solid #ccc;
+        float: left;
+        margin: 16px;
+      }
+
+      /* ex 01 默认为从上到下   */
+      .gradient1{
+        background: linear-gradient(#e86a43, #fff);
+      }
+
+      /* ex 02 从左到右渐变  */
+      .gradient2{
+        background: -webkit-linear-gradient(left, #64d1dd, #fff);
+        background: linear-gradient(left, #64d1dd, #fff);
+      }
+
+      /* ex 03 从左上到右下 */
+      .gradient3{
+        background: linear-gradient(-45deg, #e86a43, #fff);
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="gradient1"></div>
+    <div class="gradient2"></div>
+    <div class="gradient3"></div>
+  </body>
+</html>
