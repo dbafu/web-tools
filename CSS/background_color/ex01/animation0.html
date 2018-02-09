@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      @-webkit-keyframes glow {
+        0% {
+          -webkit-box-shadow: 0 0 12px rgba(72, 106, 170, 0.5);
+          box-shadow: 0 0 12px rgba(72, 106, 170, 0.5);
+          border-color: rgba(160, 179, 214, 0.5);
+         }
+        100% {
+          box-shadow: 0 0 12px rgba(72, 106, 170, 1.0), 0 0 18px rgba(0, 140, 255, 1.0);
+          -webkit-box-shadow: 0 0 12px rgba(72, 106, 170, 1.0), 0 0 18px rgba(0, 140, 255, 1.0);
+          border-color: rgba(160, 179, 214, 1.0);
+         }
+      }
+      @-o-keyframes glow {
+        0% {
+          -webkit-box-shadow: 0 0 12px rgba(72, 106, 170, 0.5);
+          box-shadow: 0 0 12px rgba(72, 106, 170, 0.5);
+          border-color: rgba(160, 179, 214, 0.5);
+         }
+        100% {
+          box-shadow: 0 0 12px rgba(72, 106, 170, 1.0), 0 0 18px rgba(0, 140, 255, 1.0);
+          -webkit-box-shadow: 0 0 12px rgba(72, 106, 170, 1.0), 0 0 18px rgba(0, 140, 255, 1.0);
+          border-color: rgba(160, 179, 214, 1.0);
+         }
+      }
+      @-moz-keyframes glow {
+        0% {
+          -webkit-box-shadow: 0 0 12px rgba(72, 106, 170, 0.5);
+          box-shadow: 0 0 12px rgba(72, 106, 170, 0.5);
+          border-color: rgba(160, 179, 214, 0.5);
+         }
+        100% {
+          box-shadow: 0 0 12px rgba(72, 106, 170, 1.0), 0 0 18px rgba(0, 140, 255, 1.0);
+          -webkit-box-shadow: 0 0 12px rgba(72, 106, 170, 1.0), 0 0 18px rgba(0, 140, 255, 1.0);
+          border-color: rgba(160, 179, 214, 1.0);
+         }
+      }
+      @keyframes glow {
+        0% {
+          -webkit-box-shadow: 0 0 12px rgba(72, 106, 170, 0.5);
+          box-shadow: 0 0 12px rgba(72, 106, 170, 0.5);
+          border-color: rgba(160, 179, 214, 0.5);
+         }
+        100% {
+          box-shadow: 0 0 12px rgba(72, 106, 170, 1.0), 0 0 18px rgba(0, 140, 255, 1.0);
+          -webkit-box-shadow: 0 0 12px rgba(72, 106, 170, 1.0), 0 0 18px rgba(0, 140, 255, 1.0);
+          border-color: rgba(160, 179, 214, 1.0);
+         }
+      }
+      .anim_img {
+        padding: 3px;
+        border: 1px solid #beceeb;
+        background-color: #fff;
+        box-shadow: 0 0 8px rgba(72, 106, 170, 0.5);
+        box-shadow: 0 0 8px rgba(72, 106, 170, 0.5);
+      }
+      .anim_img:hover {
+        background-color: #f0f3f9;
+        -webkit-animation-name: glow;
+        animation-name: glow;
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        -webkit-animation-direction: alternate;
+        animation-direction: alternate;
+        -webkit-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <img src="14.jpg" alt="head" class="anim_img">
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      .anim_fade_image{
+        position: absolute;
+        -webkit-transition: opacity 1s ease-in-out;
+        -o-transition: opacity 1s ease-in-out;
+        transition: opacity 1s ease-in-out;
+      }
+      .anim_fade_image:hover, .anim_fade_image_hover{
+        opacity: 0;
+        filter: alpha(opacity=0);
+      }
+    </style>
+  </head>
+  <body>
+    <img src="ps6.jpg" alt="head" class="anim_fade_image">
+    <img src="ps4.jpg" alt="head">
+  </body>
+</html>

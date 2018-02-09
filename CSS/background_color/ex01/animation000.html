@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style media="screen">
+    @keyframes fadeInOut {
+      0% {
+        opacity: 1;
+      }
+      25% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 0;
+      }
+      75% {
+        opacity: 1;
+      }
+    }
+
+    .anim_fade_image {
+      position: absolute;
+      animation-name: fadeInOut;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-duration: 12s;
+      animation-direction: alternate;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="ps6.jpg" alt="head" class="anim_fade_image">
+  <img src="ps4.jpg" alt="head">
+</body>
+
+</html>
