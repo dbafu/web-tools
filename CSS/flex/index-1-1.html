@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>old center method</title>
+  <style media="screen">
+    .dad1, .dad2 {
+      position: relative;
+      width: 80%;
+      height: 200px;
+      background-color: #333;
+      border: 3px solid #ff0;
+      margin: 0 auto 20px;
+    }
+
+    .son1 {
+      position: absolute;
+      margin: auto;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border: 2px solid #00f;
+    }
+
+    .son2 {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -50px;
+      margin-left: -50px;
+      border: 2px solid #0f0;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="dad1">
+    <div class="son1"></div>
+  </div>
+  <div class="dad2">
+    <div class="son2"></div>
+  </div>
+</body>
+</html>

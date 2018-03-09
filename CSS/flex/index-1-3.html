@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>flex 02</title>
+  <style media="screen">
+    .dad1, .dad2, .dad3, .dad4, .dad5 {
+      width: 80%;
+      height: 200px;
+      background-color: #222;
+      border: 5px solid #0f0;
+      margin: 0 auto 40px;
+      display: -webkit-flex;
+      display: -ms-flex;
+      display: flex;
+      color: #f00;
+    }
+    .dad1 {
+      justify-content: flex-start;
+    }
+    .dad2{
+      justify-content: flex-end;
+    }
+    .dad3{
+      justify-content: center;
+    }
+    .dad4{
+      justify-content: space-around;
+    }
+    .son1, .son2, .son3 {
+      height: 50px;
+      border-radius: 20px;
+    }
+    .son1 {
+      width: 120px;
+      background-color: #3986ac;
+    }
+    .son2 {
+      width: 80px;
+      background-color: #5cb440;
+    }
+    .son3 {
+      width: 100px;
+      background-color: #d28835;
+    }
+
+  </style>
+</head>
+<body>
+  <h3>display: flex; justify-content: flex-start</h3>
+  <div class="dad1">
+    <div class="son1"></div>
+    <div class="son2"></div>
+    <div class="son3"></div>
+  </div>
+  <h3>display: flex; justify-content: flex-end</h3>
+  <div class="dad2">
+    <div class="son1"></div>
+    <div class="son2"></div>
+    <div class="son3"></div>
+  </div>
+  <h3>display: flex; justify-content: center</h3>
+  <div class="dad3">
+    <div class="son1"></div>
+    <div class="son2"></div>
+    <div class="son3"></div>
+  </div>
+  <h3>display: flex; justify-content: space-around</h3>
+  <div class="dad4">
+    <div class="son1"></div>
+    <div class="son2"></div>
+    <div class="son3"></div>
+  </div>
+  <h3>display: flex; justify-content: space-between</h3>
+  <div class="dad5">
+    <div class="son1"></div>
+    <div class="son2"></div>
+    <div class="son3"></div>
+  </div>
+</body>
+</html>
