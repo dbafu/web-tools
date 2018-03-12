@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>flex 02</title>
   <style media="screen">
-    .dad1, .dad2, .dad3, .dad4, .dad5 {
+    .dad1, .dad2, .dad3, .dad4, .dad5, .dad6, .dad7, .dad8, .dad9, .dad10{
       width: 80%;
       height: 200px;
       background-color: #222;
@@ -29,6 +29,24 @@
     .dad4{
       justify-content: space-around;
     }
+    .dad5{
+      justify-content: space-between;
+    }
+    .dad6 {
+      align-items: flex-start;
+    }
+    .dad7 {
+      align-items: flex-end;
+    }
+    .dad8 {
+      align-items: center;
+    }
+    .dad9 {
+      align-items: baseline;
+    }
+    .dad10{
+      align-items: stretch;
+    }
     .son1, .son2, .son3 {
       height: 50px;
       border-radius: 20px;
@@ -46,35 +64,67 @@
       background-color: #d28835;
     }
 
+
   </style>
 </head>
 <body>
-  <h3>display: flex; justify-content: flex-start</h3>
+  <h3>01 display: flex; justify-content: flex-start</h3>
   <div class="dad1">
     <div class="son1"></div>
     <div class="son2"></div>
     <div class="son3"></div>
   </div>
-  <h3>display: flex; justify-content: flex-end</h3>
+  <h3>02 display: flex; justify-content: flex-end</h3>
   <div class="dad2">
     <div class="son1"></div>
     <div class="son2"></div>
     <div class="son3"></div>
   </div>
-  <h3>display: flex; justify-content: center</h3>
+  <h3>03 display: flex; justify-content: center</h3>
   <div class="dad3">
     <div class="son1"></div>
     <div class="son2"></div>
     <div class="son3"></div>
   </div>
-  <h3>display: flex; justify-content: space-around</h3>
+  <h3>04 display: flex; justify-content: space-around</h3>
   <div class="dad4">
     <div class="son1"></div>
     <div class="son2"></div>
     <div class="son3"></div>
   </div>
-  <h3>display: flex; justify-content: space-between</h3>
+  <h3>05 display: flex; justify-content: space-between</h3>
   <div class="dad5">
+    <div class="son1"></div>
+    <div class="son2"></div>
+    <div class="son3"></div>
+  </div>
+  <h3>06 display:flex align-items: flex-start</h3>
+  <div class="dad6">
+    <div class="son1"></div>
+    <div class="son2"></div>
+    <div class="son3"></div>
+  </div>
+  <h3>07 display:flex align-items: flex-end</h3>
+  <div class="dad7">
+    <div class="son1"></div>
+    <div class="son2"></div>
+    <div class="son3"></div>
+  </div>
+  <h3>08 display:flex align-items: center</h3>
+  <div class="dad8">
+    <div class="son1"></div>
+    <div class="son2"></div>
+    <div class="son3"></div>
+  </div>
+  <h3>09 display:flex align-items: baseline</h3>
+  <div class="dad9">
+    <p style="font-size: 60px;">Baseline</p>
+    <div class="son1"></div>
+    <div class="son2"></div>
+    <div class="son3"></div>
+  </div>
+  <h3>10 display:flex align-items: stretch</h3>
+  <div class="dad10">
     <div class="son1"></div>
     <div class="son2"></div>
     <div class="son3"></div>

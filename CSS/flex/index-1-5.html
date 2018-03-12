@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>flex</title>
+	<style>
+		.dad1, .dad2, .dad3, .dad4, .dad5{
+			width: 80%;
+			height: 200px;
+			background-color: #222;
+			border: 6px solid #0f0;
+			margin: 20px auto;
+			display: -webkit-flex;
+			display: -moz-flex;
+			display: -ms-flex;
+			display: -o-flex;
+			display: flex;
+		}
+		.son1, .son2, .son3 {
+			height: 50px;
+			flex-grow: 1;
+			align-self: stretch;
+		}
+		.son1 {
+			border: 3px solid #f00;
+			/*flex-grow: 2;*/
+			flex-basis: 50px;
+		}
+		.son2 {
+			border: 3px solid #0f0;
+			flex-grow: 3;
+		}
+		.son3 {
+			border: 3px solid #00f;
+			flex-grow: 2;
+		}
+	</style>
+</head>
+<body>
+	<div class="dad1">
+		<div class="son1"></div>
+		<div class="son2"></div>
+		<div class="son3"></div>
+	</div>
+	<div class="dad2">
+		<div class="son1"></div>
+		<div class="son2"></div>
+		<div class="son3"></div>
+	</div>
+	<div class="dad3">
+		<div class="son1"></div>
+		<div class="son2"></div>
+		<div class="son3"></div>
+	</div>
+	<div class="dad4">
+		<div class="son1"></div>
+		<div class="son2"></div>
+		<div class="son3"></div>
+	</div>
+	<div class="dad5">
+		<div class="son1"></div>
+		<div class="son2"></div>
+		<div class="son3"></div>
+	</div>
+</body>
+</html>
