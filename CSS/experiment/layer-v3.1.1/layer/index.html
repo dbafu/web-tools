@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>layerui</title>
+  <script src="jquery-1.11.3.js"></script>
+  <script src="layer.js"></script>
+</head>
+<body>
+  <div id="test4">test</div>
+
+  <script>
+ $('#test4').on('click', function(){ var ii = layer.load(); 
+ //此处用setTimeout演示ajax的回调 
+ setTimeout(function(){ 
+  //  layer.close(ii);
+  }, 1000); 
+});
+  </script>
+</body>
+</html>
