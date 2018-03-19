@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>baidu Map demo 01</title>
+	<script src="../jquery-1.11.3.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=bGyuijx9cw14u5H686FY9TD2ehzqsSWe"></script>
+    <style>
+		#map {
+			height: 100%;
+		}
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="map"></div>
+	<script>
+		var map = new BMap.Map('map');
+		var point = new BMap.Point(116.404, 39.915);
+		// map.centerAndZoom(point, 11);
+		map.centerAndZoom('周口', 14);
+		
+		var TILE_SIZE = 256;
+
+		map.addEventListener('click', function(e){
+			var info = new BMap.InfoWindow('', {width: 256});
+			var projection = this.getMapType().getProjection();
+			var lngLat = e.point;
+			var lngLatStr = '经纬度：' + lngLat.lng + ',' + lngLat.lat;
+			var worldCoordinate = projection.lngLatToPoint(lngLat);
+			var worldCoordStr = '<br /> 平面坐标：' + worldCoordinate.x + ',' + worldCoordinate.y;
+			var pixelCoordinate = new BMap.Pixel(Math.floor(worldCoordinate.x*Math.pow(2, this.getZoom() - 18)), Math.floor(worldCoordinate.y*Math.pow(2, this.getZoom() - 18))); 
+			var pixelCoordStr = '<br/> 像素坐标：' + pixelCoordinate.x + ',' + pixelCoordinate.y;
+			var tileCoordinate = new BMap.Pixel(Math.floor(pixelCoordinate.x/256), Math.floor(pixelCoordinate.y/256));
+			var tileCoordStr = '<br/> 图块坐标：' + tileCoordinate.x + ',' + tileCoordinate.y;
+			var viewportCoordinate = map.pointToPixel(lngLat);
+			var viewportCoordStr = '<br/> 视口坐标：' + viewportCoordinate.x + ',' + viewportCoordinate.y;
+			var overlayCoordinate = map.pointToOverlayPixel(lngLat);
+			var overlayCoordStr = '<br/>覆盖物坐标'  + overlayCoordinate.x + ',' + overlayCoordinate.y;
+
+			info.setContent(lngLatStr + worldCoordStr + pixelCoordStr + tileCoordStr + viewportCoordStr + overlayCoordStr);
+			map.openInfoWindow(info, lngLat);
+
+		})
+
+	</script>
+</body>
+</html>
