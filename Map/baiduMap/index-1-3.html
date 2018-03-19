@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>baidu Map demo 01</title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=bGyuijx9cw14u5H686FY9TD2ehzqsSWe"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #main {
+            height: 100%;
+        }
+        #top{width:100%;height:79px;border-bottom:1px solid #ccc;background:#eee;}
+        #aside{position:absolute;top:80px;width:159px;border-right:1px solid #bbb;background:#ddd;}
+        #map{margin-left:160px;}
+    </style>
+</head>
+<body onload="init()" onresize="checkSize()">
+    <div id="top"></div>
+    <div id="main">
+        <div id="aside"></div>
+        <div id="map"></div>
+    </div>
+    <script>
+        function checkSize(){
+            var h = document.documentElement.clientHeight;
+            document.getElementById('aside').style.height = h - 80 + 'px';
+            document.getElementById('map').style.height = h - 80 + 'px';
+        }
+
+        function init() {
+            checkSize();
+            var map = new BMap.Map('map');
+            map.centerAndZoom('北京');
+            window.map = map;
+        }
+
+        function toFullScreen() {
+            map.disableAutoResize()
+            var curPix = map.pointToPixel(map.getCenter());
+            var newPix = new BMap.Pixel(curPix.x - 80, curPix.y - 40);
+            var newCenter = map.pixelToPoint(newPix);
+            document.getElementById('top').style.display = "none";
+            document.getElementById('aside').style.display = "none";
+            var h = document.documentElement.clientHeight;
+            var mapContainer = document.getElementById('map');
+            mapContainer.style.height = h + 'px';
+            mapContainer.style.marginLeft = '0';
+            map.checkResize();
+            map.setCenter(newCenter);
+            map.enableAutoResize();
+        }
+    </script>
+</body>
+</html>
