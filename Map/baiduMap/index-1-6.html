@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>baidu Map demo 06</title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=bGyuijx9cw14u5H686FY9TD2ehzqsSWe"></script>
+    <style>
+		#map {
+			height: 100%;
+		}
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="map"></div>
+	<script>
+		var map = new BMap.Map('map');
+		map.centerAndZoom(new BMap.Point(116.380797, 39.918497), 18);
+
+		var icon = new BMap.Icon('marker_icon1.png', new BMap.Size(20, 32), {
+			anchor: new BMap.Size(10, 30),
+			infoWindowAnchor: new BMap.Size(10, 0),
+		});
+
+		var mkr = new BMap.Marker(new BMap.Point(116.38076, 39.918986), {
+			icon: icon,
+			enableDragging: true,
+			raiseOnDrag: true,
+		});
+		mkr.addEventListener('click', function(){
+			this.openInfoWindow(new BMap.InfoWindow('Hello'));
+		});
+		mkr.addEventListener('dragend', function(e){
+			console.log(e.point.lng + ',' + e.point.lat)
+		})
+
+		map.addOverlay(mkr);
+
+	</script>
+</body>
+</html>
