@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>国家地图 demo</title>
+    <!-- <script src="bd09_wsg84.js"></script> -->
+    <script src="jquery.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=bGyuijx9cw14u5H686FY9TD2ehzqsSWe"></script>
+    <style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    #top {
+        width: 100%;
+        height: 79px;
+        border-bottom: 1px solid #000;
+        position: absolute;
+        left: 160px;
+        top: 0;
+        background: #eee;
+        z-index: 3;
+    }
+
+    #left {
+        width: 159px;
+        height: 100%;
+        border-right: 1px solid #000;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: #eee;
+        z-index: 3;
+    }
+
+    #map {
+        height: 100%;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="top">top 国家地图</div>
+    <div id="left">left</div>
+    <div id="map"></div>
+    <script>
+    var map = new BMap.Map('map');
+    var point = new BMap.Point(116.404, 39.915);
+    map.centerAndZoom(point, 5);
+
+    map.enableKeyboard();
+    
+
+
+
+    var pi = 3.1415926535897932384626;
+    var a = 6378245.0;
+    var ee = 0.00669342162296594323;
+
+    function bd09_To_Gcj02(bd_lat, bd_lon) {
+        var gps = {};
+        var x = bd_lon - 0.0065,
+            y = bd_lat - 0.006;
+        var z = Math.sqrt(x * x + y * y) - 0.00002 * Math.sin(y * pi);
+        var theta = Math.atan2(y, x) - 0.000003 * Math.cos(x * pi);
+        var gcj_lon = z * Math.cos(theta);
+        var gcj_lat = z * Math.sin(theta);
+        gps.gcj_lon = gcj_lon;
+        gps.gcj_lat = gcj_lat;
+        return gps;
+    }
+
+    // console.log(bd09_To_Gcj02(94.768779,38.714555))
+    // console.log()
+
+    function gcj_To_Gps84(lat, lon) {
+        var gps84 = {};
+        var gps = transform(lat, lon);
+        var lontitude = lon * 2 - gps.lon;
+        var latitude = lat * 2 - gps.lat;
+        gps84.lon = lontitude;
+        gps84.lat = latitude;
+
+        return gps84;
+    }
+
+    function bd09_To_Gps84(bd_lat, bd_lon) {
+        var gcj_gps = bd09_To_Gcj02(bd_lat, bd_lon);
+        var gps = gcj_To_Gps84(gcj_gps.gcj_lon, gcj_gps.gcj_lat)
+        return gps;
+    }
+
+    function outOfChina(lat, lon) {
+        if (lon < 72.004 || lon > 137.8347)
+            return true;
+        if (lat < 0.8293 || lat > 55.8271)
+            return true;
+        return false;
+    }
+
+    function transform(lat, lon) {
+        var gps = {};
+        if (outOfChina(lat, lon)) {
+            gps.lon = lon;
+            gps.lat = lat;
+            return gps;
+        }
+        var dLat = transformLat(lon - 105.0, lat - 35.0);
+        var dLon = transformLon(lon - 105.0, lat - 35.0);
+        var radLat = lat / 180.0 * pi;
+        var magic = Math.sin(radLat);
+        magic = 1 - ee * magic * magic;
+        var sqrtMagic = Math.sqrt(magic);
+        dLat = (dLat * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * pi);
+        dLon = (dLon * 180.0) / (a / sqrtMagic * Math.cos(radLat) * pi);
+        var mgLat = lat + dLat;
+        var mgLon = lon + dLon;
+        gps.lon = mgLon;
+        gps.lat = mgLat;
+        return gps;
+    }
+
+    function transformLat(x, y) {
+        var ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y +
+            0.2 * Math.sqrt(Math.abs(x));
+        ret += (20.0 * Math.sin(6.0 * x * pi) + 20.0 * Math.sin(2.0 * x * pi)) * 2.0 / 3.0;
+        ret += (20.0 * Math.sin(y * pi) + 40.0 * Math.sin(y / 3.0 * pi)) * 2.0 / 3.0;
+        ret += (160.0 * Math.sin(y / 12.0 * pi) + 320 * Math.sin(y * pi / 30.0)) * 2.0 / 3.0;
+        return ret;
+    }
+
+    function transformLon(x, y) {
+        var ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 *
+            Math.sqrt(Math.abs(x));
+        ret += (20.0 * Math.sin(6.0 * x * pi) + 20.0 * Math.sin(2.0 * x * pi)) * 2.0 / 3.0;
+        ret += (20.0 * Math.sin(x * pi) + 40.0 * Math.sin(x / 3.0 * pi)) * 2.0 / 3.0;
+        ret += (150.0 * Math.sin(x / 12.0 * pi) + 300.0 * Math.sin(x / 30.0 *
+            pi)) * 2.0 / 3.0;
+        return ret;
+    }
+
+
+
+
+    map.addEventListener('click', function(e) {
+        console.log(e.point.lng + ',' + e.point.lat);
+        // alert('点击坐标：' + e.pixel.x + ',' + e.pixel.y);
+
+        var gps = {};
+        gps = bd09_To_Gps84(e.point.lat, e.point.lng)
+        // console.log('gps84 : ' + gps.lon + ',' + gps.lat);
+
+        var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='
+        	+ gps.lon + ',' + gps.lat 
+        	+ '&key=AIzaSyAOMkLzEI9T3yPXQ1xutZFjNyhOUIr4V6E';
+        $.get(url, function(data){
+        	console.log(data);
+        });
+
+
+    });
+    </script>
+</body>
+
+</html>

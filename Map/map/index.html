@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>自定义地图类型</title>
+<style>
+    html,body{
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    #map{
+        height: 100%;
+    }
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2"></script>
+</head>
+<body>
+<div id="map"></div>
+<script type="text/javascript">
+var tileLayer = new BMap.TileLayer();
+tileLayer.getTilesUrl = function(tileCoord, zoom) {
+    var x = tileCoord.x;
+    var y = tileCoord.y;
+    return 'tiles/' + zoom + '/tile-' + x + '_' + y + '.png';
+}
+var MyMap = new BMap.MapType('MyMap', tileLayer, {minZoom: 5, maxZoom: 10});
+var map = new BMap.Map('map', {mapType: MyMap});
+map.addControl(new BMap.NavigationControl());
+map.centerAndZoom(new BMap.Point(116.407447814941, 39.9185409545898), 10);
+</script>
+</body>
+</html>

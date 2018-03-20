@@ -35,29 +35,36 @@
         // map.removeEventListener('click', clickHandler);
 
         // map.addEventListener('click', function(e){
-        //     // alert('点击坐标：' + e.point.lng + ',' + e.point.lat);
+        //     alert('点击坐标：' + e.point.lng + ',' + e.point.lat);
         //     alert('点击坐标：' + e.pixel.x + ',' + e.pixel.y);
         // });
+
+
+        map.addEventListener('click', function(e){
+            console.log(e.point.lng + ',' + e.point.lat);
+            // alert('点击坐标：' + e.pixel.x + ',' + e.pixel.y);
+        });
+
 
         // map.addEventListener('dragend', function(e){
         //     alert(this.getCenter());
         // });
 
-        var marker = [];
-        for (var i = 0; i < 10; i++){
-            var mkr = new BMap.Marker(new BMap.Point(116.2 + i / 20, 39.855), {title: i + 1});
-            marker.push(mkr);
-            map.addOverlay(mkr);
-        }
+        // var marker = [];
+        // for (var i = 0; i < 10; i++){
+        //     var mkr = new BMap.Marker(new BMap.Point(116.2 + i / 20, 39.855), {title: i + 1});
+        //     marker.push(mkr);
+        //     map.addOverlay(mkr);
+        // }
 
-        for (var i = 0; i < 10; i++){
-            (function(){
-                var index = i;
-                marker[i].addEventListener('click', function(){
-                    this.openInfoWindow(new BMap.InfoWindow('我是第' + (index + 1) + '个标注'));
-                })
-            })();
-        }
+        // for (var i = 0; i < 10; i++){
+        //     (function(){
+        //         var index = i;
+        //         marker[i].addEventListener('click', function(){
+        //             this.openInfoWindow(new BMap.InfoWindow('我是第' + (index + 1) + '个标注'));
+        //         })
+        //     })();
+        // }
     </script>
 </body>
 </html>

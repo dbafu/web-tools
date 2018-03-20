@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>世界地图 demo</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/common.css" />
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=bGyuijx9cw14u5H686FY9TD2ehzqsSWe"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+    <style>
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		#top {
+			width: 100%;
+			height: 79px;
+			border-bottom: 1px solid #000;
+			position: absolute;
+			left: 0;
+			top: 0;
+			background: #eee;
+			z-index: 3;
+		}
+		#left {
+			width: 335px;
+			height: 100%;
+			border-right: 1px solid #000;
+			position: absolute;
+			left: 0;
+			top: 80px;
+			background: #eee;
+			z-index: 3;
+		}
+		#right {
+			width: 335px;
+			height: 100%;
+			border-left: 1px solid #000;
+			position: absolute;
+			right: 0;
+			top: 80px;
+			background: #eee;
+			z-index: 3;
+		}
+		#map {
+			height: 100%;
+		}
+	</style>
+</head>
+<body>
+	<div id="top">top  世界地图</div>
+	<div id="left">left</div>
+	<div id="right">
+		<div class="righttop">概况</div>
+		 <div class="rightarea">
+		 	<div class="bor-top">
+		 		<div class="statname">电站数量(座)</div>
+		 		<div class="statlist">
+		 			<div class="h100 w50 fl" id="dzsl"></div>
+		 			<div class="h100 w50 fl"  >
+			 			<div  class="h100 mt10 fl mainright-smail" >
+								<dl  class="rightdl">
+									<dd  >
+										<a class="i1"></a>
+										<div class="ti" >
+											  已投运
+										</div>
+										<div class="val" id="tysl">16座电站</div>
+									</dd>
+									<dd class=""  >
+										<a class="i2"></a>
+										<div class="ti" >
+											  在建
+										</div>
+										<div class="val" id="zjsl">16座电站</div>
+										</dd>
+									<dd class=""   >
+										<a class="i3" style='width:20px!important;'></a>
+										<div class="ti"  >
+											 计划
+										</div>
+										<div class="val" id="jhsl">16座电站</div>
+									</dd>
+								</dl>
+							</div>
+		 			</div>
+		 		</div>
+		 		<div class="statname">电站容量(MW)</div>
+		 		<div class="statlist" >
+	 				<div class="h100 w50 fl" id="dzrl"></div>
+	 				<div class="h100 w50 fl"  >
+	 					<div  class="h100 mt10 fl" >
+								<dl class="rightdl">
+									<dd class="" >
+										<a class="i1"></a>
+										<div class="ti" >
+											  已投运
+										</div>
+										<div class="val" id="tyrl">260</div>
+									</dd>
+									<dd class="" >
+										<a class="i2"></a>
+										<div class="ti" >
+											  在建
+										</div>
+										<div class="val" id="zjrl">260</div>
+									</dd>
+									<dd class=""  >
+										<a class="i3" style='width: 20px!important;'></a>
+										<div class="ti"  >
+											 计划
+										</div>
+										<div class="val" id="jhrl">260</div>
+									</dd>
+								</dl>
+							</div>
+	 				</div>
+		 		</div>
+		 	</div>
+		 	<div class="cler"> </div>
+		 	<div class="bor-top">
+		 		<div class="statname" style="float:left;border-bottom:0;height: 30px;line-height: 30px;padding: 6px 20px 0;">安全运行天数(天)</div><span class="statnum" id="aqyxts" style="float:left;padding-top: 6px;height: 30px;line-height: 30px;"></span>
+		 		 
+		 		<div class="statname" style="float:left;border-bottom:0;height: 40px;line-height: 40px;padding: 0 20px;">累计收益(元)</div><span class="statnum" id="ljsy" style="float:left;"></span>
+		 		 
+		 	</div>
+		 	<div class="cler"> </div>
+		 	<div class="bor-top">
+		 		<div class="statname">光储充概况(MW)</div>
+		 		<div class="statlist">
+		 			<ul>
+		 				<li>
+		 					<i class="i1"></i>
+		 					<span class="nam">光伏功率</span>
+		 					<span class="va"  id="gfgl">2680</span>
+		 				</li>
+		 				<li>
+		 					<i class="i2"></i>
+		 					<span class="nam">储能功率</span>
+		 					<span class="va"  id="cngl">2680</span>
+		 				</li>
+		 				<li>
+		 					<i class="i3"></i>
+		 					<span class="nam">充电功率</span>
+		 					<span class="va"  id="cdgl">2680</span>
+		 				</li>
+		 			</ul>
+		 		</div>
+		 	</div>
+		 	<div class="bor-top">
+		 		<div class="statname">社会贡献</div>
+		 		<div class="statlist">
+		 			<ul>
+		 				<li>
+		 					<i class="i4"></i>
+		 					<span class="nam">等效植树</span>
+		 					<span class="va" id="dxzs">260棵</span>
+		 				</li>
+		 				<li>
+		 					<i class="i5"></i>
+		 					<span class="nam">二氧化碳</span>
+		 					<span class="va" id="eyht">260吨</span>
+		 				</li>
+		 				<li>
+		 					<i class="i6"></i>
+		 					<span class="nam">节约标煤</span>
+		 					<span class="va" id="jybm">260吨</span>
+		 				</li>
+		 			</ul>
+		 		</div>
+		 	</div>
+		 </div>
+		 <span class="openbut2 rg-zk" id="rg-openbut"></span>
+	</div>
+	</div>
+	<div id="map"></div>
+
+	<script>
+		var map = new BMap.Map('map', {
+			minZoom: 3,
+			maxZoom: 10,
+		});
+		var point = new BMap.Point(116.404, 39.915);
+		map.centerAndZoom(point, 5);
+
+		map.enableKeyboard();
+		map.enableScrollWheelZoom();
+
+		// var MarkerCluster = 
+
+		var MAX = 100;
+	    var markers = [];
+	    var pt = null;
+	    
+	    for (var i = 0; i < MAX; i++) {
+	       pt = new BMap.Point(Math.random() * 4000 + 85, Math.random() * 300 + 21);
+	       markers.push(new BMap.Marker(pt));
+	    }
+	    //最简单的用法，生成一个marker数组，然后调用markerClusterer类即可。
+	    var markerClusterer = new BMapLib.MarkerClusterer(map, {markers:markers});
+
+		map.setViewport(point);
+	 //    if(markerArr.length > 1 ){
+		// 	//让所有点在视野范围内
+		// }
+	</script>
+
+	<script>
+		function chart(serData,zsl){
+		var myChart5=echarts.init(document.getElementById('dzsl'),'shine');
+		 var option5 = {
+				 title: {
+				        text: zsl,
+				        x: 'center',
+				        y: 'center',
+				        itemGap: 15,
+				        textStyle : {
+				            color : 'rgba(0,0,0,0.8)', 
+				            fontSize : 14 
+				        },
+				        subtextStyle : {
+				        	 fontSize : 14 
+				        }
+				    },
+		    series : [
+		        {
+		            name:'电站数量',
+		            type:'pie',
+		            radius : ['65%', '75%'],
+		            itemStyle : {
+		                normal : {
+		                    label : {
+		                        show : false
+		                    },
+		                    labelLine : {
+		                        show : false
+		                    }
+		                } 
+		            },
+		            data: serData
+		        }
+		    ]
+		};
+		myChart5.setOption(option5);
+		////////////////////////////////////////////////////////////
+	}
+	
+	function chart1(serData,zrl){
+		var myChart6=echarts.init(document.getElementById('dzrl'),'shine');
+		 var option5 = {
+			 title: {
+			        text: zrl,
+			        x: 'center',
+			        y: 'center',
+			        itemGap: 15,
+			        textStyle : {
+			            color : 'rgba(0,0,0,0.8)', 
+			            fontSize : 14 
+			        },
+			        subtextStyle : {
+			        	 fontSize : 14 
+			        }
+			    },
+		    series : [
+		        {
+		            name:'电站容量',
+		            type:'pie',
+		            radius : ['65%', '75%'] ,
+		            itemStyle : {
+		                normal : {
+		                    label : {
+		                        show : false
+		                    },
+		                    labelLine : {
+		                        show : false
+		                    }
+		                } 
+		            },
+		            data:serData
+		        }
+		    ]
+		};
+		myChart6.setOption(option5);
+		////////////////////////////////////////////////////////////
+	}
+	</script>
+</body>
+</html>

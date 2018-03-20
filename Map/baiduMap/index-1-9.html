@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>baidu Map demo 01</title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=bGyuijx9cw14u5H686FY9TD2ehzqsSWe"></script>
+    <style>
+    #map {
+        height: 100%;
+    }
+
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+    var map = new BMap.Map('map');
+    var point = new BMap.Point(116.404, 39.915);
+    map.centerAndZoom(point, 3);
+
+    var provinces = ["广西-#C8C1E3", "广东-#FBC5DC", "湖南-#DBEDC7", "贵州-#E7CCAF", "云南-#DBEDC7",
+        "福建-#FEFCBF", "江西-#E7CCAF", "浙江-#C8C1E3", "安徽-#FBC5DC", "湖北-#C8C1E3",
+        "河南-#DBECC8", "江苏-#DBECC8", "四川-#FCFBBB", "海南省-#FCFBBB", "山东-#FCFBBB", "辽宁-#FCFBBB",
+        "新疆-#FCFBBB", "西藏-#E7CCAF", "陕西-#E7CCAF", "河北-#E7CCAF", "黑龙江-#E7CCAF", "宁夏-#FBC5DC",
+        "内蒙古自治区-#DBEDC7", "青海-#DBEDC7", "甘肃-#C8C1E3", "山西-#FBC5DC", "吉林省-#C8C1E3",
+        "北京-#FBC5DC", "天津-#C8C1E3", "三河市-#E7CCAF", "上海-#FCFBBB", "重庆市-#FBC5DC", "香港-#C8C1E3"
+    ];
+
+    function getBoundary(province) {
+        var boundary = new BMap.Boundary();
+        var name = province.split('-')[0];
+        var color = province.split('-')[1];
+        // color = '#ff0000';`
+        console.log(name + ' : ' + color);
+        boundary.get(name, function(rs) {
+            //一个省可能有好几个闭合的多边形区域
+            map.clearOverlays();
+            for (var i = 0; i < rs.boundaries.length; i++) {
+                // console.log(rs);
+                var polygon = new BMap.Polygon(rs.boundaries[i], {
+                	strokeWeight: 2,
+                	strokeColor: color,
+                	fillColor: color
+                });
+                map.addOverlay(polygon);
+                // map.setViewport(polygon.getPath());
+                polygon.getMap();
+            }
+        });
+    }
+
+    // for (var i = 0; i < provinces.length; i++){
+	   //  getBoundary(provinces[i]);
+    // }
+    
+    getBoundary(provinces[2]);
+
+    map.enableKeyboard();
+    </script>
+</body>
+
+</html>
