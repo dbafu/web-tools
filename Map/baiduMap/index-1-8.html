@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>baidu Map demo 01</title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=bGyuijx9cw14u5H686FY9TD2ehzqsSWe"></script>
+    <style>
+		#map {
+			height: 100%;
+		}
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="map"></div>
+	<script>
+		var map = new BMap.Map('map');
+		var point = new BMap.Point(116.404, 39.915);
+		map.centerAndZoom(point, 15);
+
+		map.enableKeyboard();
+
+	</script>
+</body>
+</html>
