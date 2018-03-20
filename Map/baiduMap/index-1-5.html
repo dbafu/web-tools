@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>baidu Map demo 01</title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=bGyuijx9cw14u5H686FY9TD2ehzqsSWe"></script>
+    <style>
+		#map {
+			height: 100%;
+		}
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="map"></div>
+	<script>
+		var map = new BMap.Map('map');
+		var point = new BMap.Point(116.404, 39.915);
+		map.centerAndZoom(point, 15);
+
+		function ZoomControl(){
+			this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
+			this.defaultOffset = new BMap.Size(10, 10);
+		}
+
+		ZoomControl.prototype = new BMap.Control();
+		ZoomControl.prototype.initialize = function(map){
+			var div = document.createElement('div');
+			div.appendChild(document.createTextNode('放大2级'));
+			div.style.cursor = "pointer";
+			div.style.border = "5px solid red";
+			div.style.backgroundColor = "white";
+			div.onclick = function(e){
+				map.zoomTo(map.getZoom() + 2);
+			}
+			map.getContainer().appendChild(div);
+			return div;
+		}
+
+		var myZoomCtrl = new ZoomControl()
+		map.addControl(myZoomCtrl);
+
+	</script>
+</body>
+</html>
