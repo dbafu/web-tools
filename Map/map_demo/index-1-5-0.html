@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>国家地图 demo</title>
+  <link rel="stylesheet" href="css/style.css?pubVersion=201802070001" />
+  <link rel="stylesheet" href="css/common.css?pubVersion=201802070001" />
+  <script src="js/bd09_wsg84.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/echarts.min.js"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=bGyuijx9cw14u5H686FY9TD2ehzqsSWe"></script>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #top {
+      width: 100%;
+      height: 45px;
+      border-bottom: 1px solid #000;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: #eee;
+      z-index: 3;
+    }
+
+    #left {
+      width: 159px;
+      height: 100%;
+      border-right: 1px solid #000;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: #eee;
+      z-index: 3;
+    }
+
+    #map {
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <!--<div id="top">top 国家地图</div>-->
+  <div class="leftnav dz">
+    <div class="lefttop">
+      <span class="tit" title="密云大厂光伏电站" id="pws_name">密云大厂光伏电站</span>
+      <span class="subtit">业主：<span id="pws_comName" title="启能光科公司">启能光科公司</span></span>
+    </div>
+    <div class="letsoso">
+      <span class="img">
+				 <img src="images/gf1.png" style="width:50%">
+				 <img src="images/gf2.png" style="width:50%">
+			</span>
+      <span id="pws_add">位置： 密云北关环岛出口左侧电力局旁边的A口</span>
+      <span id="pws_remark">简述： 独立运维独立运维独立运维独立运维独立运维独立运维独立运维独立运维独立运维独立运维独立运维独立运维</span>
+      <span id="pws_state">状态： 正常 </span>
+      <div class="det">
+        <a class="detbut" href="" id="pws_detail">查看详情</a>
+      </div>
+    </div>
+    <span class="openbut lf-zk" id="lf-openbut"></span>
+  </div>
+  <div class="rightnav">
+    <div class="righttop">概况</div>
+    <div class="rightarea">
+      <div class="bor-top">
+        <div class="statname">电站数量(座)</div>
+        <div class="statlist">
+          <div class="h100 w50 fl" id="dzsl"></div>
+          <div class="h100 w50 fl">
+            <div class="h100 mt10 fl mainright-smail">
+              <dl class="rightdl">
+                <dd>
+                  <a class="i1"></a>
+                  <div class="ti">
+                    已投运
+                  </div>
+                  <div class="val" id="tysl">16座电站</div>
+                </dd>
+                <dd class="">
+                  <a class="i2"></a>
+                  <div class="ti">
+                    在建
+                  </div>
+                  <div class="val" id="zjsl">16座电站</div>
+                </dd>
+                <dd class="">
+                  <a class="i3" style='width:20px!important;'></a>
+                  <div class="ti">
+                    计划
+                  </div>
+                  <div class="val" id="jhsl">16座电站</div>
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <div class="statname">电站容量(MW)</div>
+        <div class="statlist">
+          <div class="h100 w50 fl" id="dzrl"></div>
+          <div class="h100 w50 fl">
+            <div class="h100 mt10 fl">
+              <dl class="rightdl">
+                <dd class="">
+                  <a class="i1"></a>
+                  <div class="ti">
+                    已投运
+                  </div>
+                  <div class="val" id="tyrl">260</div>
+                </dd>
+                <dd class="">
+                  <a class="i2"></a>
+                  <div class="ti">
+                    在建
+                  </div>
+                  <div class="val" id="zjrl">260</div>
+                </dd>
+                <dd class="">
+                  <a class="i3" style='width: 20px!important;'></a>
+                  <div class="ti">
+                    计划
+                  </div>
+                  <div class="val" id="jhrl">260</div>
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cler"> </div>
+      <div class="bor-top">
+        <div class="statname" style="float:left;border-bottom:0;height: 30px;line-height: 30px;padding: 6px 20px 0;">安全运行天数(天)</div><span class="statnum" id="aqyxts" style="float:left;padding-top: 6px;height: 30px;line-height: 30px;"></span>
+
+        <div class="statname" style="float:left;border-bottom:0;height: 40px;line-height: 40px;padding: 0 20px;">累计收益(元)</div><span class="statnum" id="ljsy" style="float:left;"></span>
+
+      </div>
+      <div class="cler"> </div>
+      <div class="bor-top">
+        <div class="statname">光储充概况(<span id="gccgkdw">MW</span>)</div>
+        <div class="statlist">
+          <ul>
+            <li>
+              <i class="i1"></i>
+              <span class="nam">光伏功率</span>
+              <span class="va" id="gfgl">2680</span>
+            </li>
+            <li>
+              <i class="i2"></i>
+              <span class="nam">储能功率</span>
+              <span class="va" id="cngl">2680</span>
+            </li>
+            <li>
+              <i class="i3"></i>
+              <span class="nam">充电功率</span>
+              <span class="va" id="cdgl">2680</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="bor-top">
+        <div class="statname">社会贡献</div>
+        <div class="statlist">
+          <ul>
+            <li>
+              <i class="i4"></i>
+              <span class="nam">等效植树</span>
+              <span class="va" id="dxzs">260棵</span>
+            </li>
+            <li>
+              <i class="i5"></i>
+              <span class="nam">二氧化碳</span>
+              <span class="va" id="eyht">260吨</span>
+            </li>
+            <li>
+              <i class="i6"></i>
+              <span class="nam">节约标煤</span>
+              <span class="va" id="jybm">260吨</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <span class="openbut2 rg-zk" id="rg-openbut"></span>
+  </div>
+  <div id="map"></div>
+  <script>
+    var map = new BMap.Map('map');
+    var point = new BMap.Point(116.404, 39.915);
+    map.centerAndZoom(point, 4);
+
+    map.enableKeyboard();
+    map.enableScrollWheelZoom();
+    map.disableDoubleClickZoom();
+
+
+    map.addEventListener('click', function(e) {
+      console.log(e.point.lng + ',' + e.point.lat);
+      // alert('点击坐标：' + e.pixel.x + ',' + e.pixel.y);
+
+      var gps = {};
+      gps = bd09_To_Gps84(e.point.lat, e.point.lng)
+      // console.log('gps84 : ' + gps.lon + ',' + gps.lat);
+
+      var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' +
+        gps.lon + ',' + gps.lat +
+        '&key=AIzaSyAOMkLzEI9T3yPXQ1xutZFjNyhOUIr4V6E';
+      $.get(url, function(data) {
+        console.log(data);
+        var opt = {
+          width: 400,
+          height: 200,
+          title: '这位置是：',
+          enableMessage: true,
+          message: '亲爱滴，今晚去哪里吃饭？'
+        }
+        var results = data.results;
+        var content = '<p>地址：<a href="https://www.baidu.com">百度大厦</a></p><p> 国家: ' + results[results.length - 1].formatted_address + '</p>';
+
+
+        var infoWindow = new BMap.InfoWindow(content, opt);
+        infoWindow.enableAutoPan();
+
+        map.openInfoWindow(infoWindow, e.point)
+      });
+    });
+
+    function openwin(url) {
+      var a = document.createElement("a"); //创建a对象
+      a.setAttribute("href", url);
+      a.setAttribute("target", "_blank");
+      a.setAttribute("id", "camnpr");
+      document.body.appendChild(a);
+      a.click(); //执行当前对象
+    }
+
+    map.addEventListener('dblclick', function(e) {
+      var gps = {};
+      gps = bd09_To_Gps84(e.point.lat, e.point.lng)
+      // console.log('gps84 : ' + gps.lon + ',' + gps.lat);
+
+      var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' +
+        gps.lon + ',' + gps.lat +
+        '&key=AIzaSyAOMkLzEI9T3yPXQ1xutZFjNyhOUIr4V6E';
+      $.get(url, function(data) {
+        var results = data.results;
+        var country = results[results.length - 1].formatted_address;
+        var uri = 'http://localhost/w/map/index-1-6.html?cn=' + encodeURIComponent(country) +
+          '&pt=' + gps.lon + ',' + gps.lat;
+        openwin(uri);
+      })
+    });
+
+    $(function() {
+      var placeHolderStyle = {
+        normal: {
+          color: '#3285FF'
+        }
+      }
+      var placeHolderStyle1 = {
+        normal: {
+          color: '#F1B101'
+        }
+      }
+      var placeHolderStyle2 = {
+        normal: {
+          color: '#F54336'
+        }
+      }
+
+      var serData = [];
+      serData.push({
+        value: 12,
+        name: '已投运',
+        itemStyle: placeHolderStyle2
+      });
+      serData.push({
+        value: 8,
+        name: '在建',
+        itemStyle: placeHolderStyle1
+      });
+      serData.push({
+        value: 90,
+        name: '计划',
+        itemStyle: placeHolderStyle
+      });
+
+      var serData2 = [];
+      serData2.push({
+        value: 35.36,
+        name: '已投运',
+        itemStyle: placeHolderStyle2
+      });
+      serData2.push({
+        value: 80.36,
+        name: '在建',
+        itemStyle: placeHolderStyle1
+      });
+      serData2.push({
+        value: 96.32,
+        name: '计划',
+        itemStyle: placeHolderStyle
+      });
+
+
+      var zrl = 206.36;
+      var zsl = 35;
+
+
+      chart(serData, zsl);
+      chart1(serData2, zrl);
+    })
+
+    function chart(serData, zsl) {
+
+      var myChart5 = echarts.init(document.getElementById('dzsl'), 'shine');
+      var option5 = {
+        title: {
+          text: zsl,
+          x: 'center',
+          y: 'center',
+          itemGap: 15,
+          textStyle: {
+            color: 'rgba(0,0,0,0.8)',
+            fontSize: 14
+          },
+          subtextStyle: {
+            fontSize: 14
+          }
+        },
+        series: [{
+          name: '电站数量',
+          type: 'pie',
+          radius: ['65%', '75%'],
+          itemStyle: {
+            normal: {
+              label: {
+                show: false
+              },
+              labelLine: {
+                show: false
+              }
+            }
+          },
+          data: serData
+        }]
+      };
+      myChart5.setOption(option5);
+      ////////////////////////////////////////////////////////////
+    }
+
+    function chart1(serData, zrl) {
+      var myChart6 = echarts.init(document.getElementById('dzrl'), 'shine');
+      var option5 = {
+        title: {
+          text: zrl,
+          x: 'center',
+          y: 'center',
+          itemGap: 15,
+          textStyle: {
+            color: 'rgba(0,0,0,0.8)',
+            fontSize: 14
+          },
+          subtextStyle: {
+            fontSize: 14
+          }
+        },
+        series: [{
+          name: '电站容量',
+          type: 'pie',
+          radius: ['65%', '75%'],
+          itemStyle: {
+            normal: {
+              label: {
+                show: false
+              },
+              labelLine: {
+                show: false
+              }
+            }
+          },
+          data: serData
+        }]
+      };
+      myChart6.setOption(option5);
+      ////////////////////////////////////////////////////////////
+    }
+  </script>
+</body>
+
+</html>

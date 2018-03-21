@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>demo 02</title>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=bGyuijx9cw14u5H686FY9TD2ehzqsSWe"></script>
+
+  <style>
+    #demo{
+      font-size: 50px
+    }
+    #map {
+      height: 1000px;
+      width: 80%;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>国家名称是 ：</h1>
+  <div id="demo">hello</div>
+  <div id="map"></div>
+  <script type="text/javascript">
+  window.onload = function(){
+    var div = document.getElementById('demo');
+    var country = location.href.split('=')[1];
+    var cn_coun = decodeURIComponent(country);
+    cn_coun = cn_coun.split('&')[0];
+    var lng_lat = location.href.split('=')[2].split(',');
+
+
+    var map = new BMap.Map('map');
+    var point = new BMap.Point(parseFloat(lng_lat[1]), parseFloat(lng_lat[0]));
+    if(cn_coun === '俄罗斯'){
+      map.centerAndZoom(point, 5);
+    } else {
+      map.centerAndZoom(point, 7);
+    }
+    // map.centerAndZoom(cn_coun.split('&')[0], 6);
+    map.enableKeyboard();
+    map.enableScrollWheelZoom();
+    console.log(cn_coun);
+    div.innerText = 'hello : ' + cn_coun;
+  }
+  </script>
+</body>
+</html>

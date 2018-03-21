@@ -28,7 +28,7 @@ function gcj_To_Gps84(lat, lon) {
 
 function bd09_To_Gps84(bd_lat, bd_lon){
 	var gcj_gps = bd09_To_Gcj02(bd_lat, bd_lon);
-	var gps = gcj_To_Gps84(gcj_gps.lat, gcj_gps.lon)
+	var gps = gcj_To_Gps84(gcj_gps.gcj_lon, gcj_gps.gcj_lat)
 	return gps; 
 }  
 

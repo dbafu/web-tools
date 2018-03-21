@@ -53,7 +53,7 @@
     map.centerAndZoom(point, 5);
 
     map.enableKeyboard();
-    
+    map.enableScrollWheelZoom();
 
 
 
@@ -147,12 +147,27 @@
 
 
     map.addEventListener('click', function(e) {
-        console.log(e.point.lng + ',' + e.point.lat);
+        console.log('bd09: ' + e.point.lng + ',' + e.point.lat);
         // alert('点击坐标：' + e.pixel.x + ',' + e.pixel.y);
+        var geocoder1 = new BMap.Geocoder();
+        geocoder1.getLocation(e.point, function(grelt){
+        	console.log('geocoder1 : ' + grelt.address);
+        });
+
 
         var gps = {};
         gps = bd09_To_Gps84(e.point.lat, e.point.lng)
-        // console.log('gps84 : ' + gps.lon + ',' + gps.lat);
+        console.log('gps84 : ' + parseFloat(gps.lon).toFixed(6) + ',' + gps.lat.toFixed(6));
+
+        var point = new BMap.Point(parseFloat(gps.lat).toFixed(6), parseFloat(gps.lon).toFixed(6));
+
+        console.log('constructed point : ' + point.lng + ', -, ' + point.lat)
+        var geocoder2 = new BMap.Geocoder();
+        geocoder2.getLocation(point, function(grelt){
+        	console.log('geocoder2 : ' + grelt.address);
+        });
+
+        //  经过对比发现 百度地图无法通过经纬度获取国外地址
 
         var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='
         	+ gps.lon + ',' + gps.lat 
