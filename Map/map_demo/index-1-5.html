@@ -10,6 +10,8 @@
   <script src="js/jquery.js"></script>
   <script src="js/echarts.min.js"></script>
   <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=bGyuijx9cw14u5H686FY9TD2ehzqsSWe"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
   <style>
     html,
     body {
@@ -256,6 +258,34 @@
         openwin(uri);
       })
     });
+
+    // var MAX = 5;
+    // var markers = [];
+    // var pt = null;
+    // var i = 0;
+    // for (; i < MAX; i++) {
+    //    pt = new BMap.Point(Math.random() * 40 + 85, Math.random() * 30 + 21);
+    //    markers.push(new BMap.Marker(pt));
+    // }
+    // //最简单的用法，生成一个marker数组，然后调用markerClusterer类即可。
+    // var markerClusterer = new BMapLib.MarkerClusterer(map, {markers:markers});
+
+    // ============marker==============
+    var p1 = new BMap.Point(98.176572,37.802628);
+    var p2 = new BMap.Point(108.33188,28.537776);
+    var p3 = new BMap.Point(119.958971,29.829364);
+
+    var marker1 = new BMap.Marker(p1);
+    marker1.addEventListener('mouseover', function(){
+      var infoWindow = new BMap.InfoWindow('hello world');
+    });
+    map.addOverlay(marker1);
+    // map.setViewport();
+
+
+    // ============marker==============
+
+    //==========================
 
     $(function() {
       var placeHolderStyle = {
