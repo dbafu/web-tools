@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>国家地图 demo</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="common.css" />
+  <script src="bd09_wsg84.js"></script>
+  <script src="jquery.js"></script>
+  <script src="echarts.min.js"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=bGyuijx9cw14u5H686FY9TD2ehzqsSWe"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #top {
+      width: 100%;
+      height: 72px;
+      margin: 0 auto;
+      border-bottom: 1px solid #000;
+      position: relative;
+      left: 0;
+      top: 0;
+      background: #eee;
+      z-index: 3;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #left, #right{
+      width: 350px;
+      position: absolute;
+      top: 73px;
+      background: #fff;
+      z-index: 3;
+      padding-bottom: 1em;
+    }
+
+    #left h2, #right h2 {
+      text-align: center;
+    }
+
+    #left p, #right p {
+      text-indent: 1.5em;
+      font-size: 12px;
+    }
+
+    #left {
+      border-right: 5px solid #ccc;
+      left: 0;
+      width: 200px;
+      display: none;
+    }
+
+    #left h3 {
+      height: 30px;
+      line-height: 30px;
+      background-color: #3285FF;
+      font-size: 16px;
+      text-indent: 1.5em;
+      color: #fff;
+      margin-bottom: 1em;
+    }
+
+    #left h4 {
+      padding: 5px 20px;
+      width: 35%;
+      border-bottom: 1px solid #ccc;
+      color: #3285F3;
+      margin-left: 10px;
+      margin-bottom: 1em;
+    }
+    #left p {
+      padding-left: 1.5em;
+      padding-right: 1em;
+
+    }
+
+    #right {
+      border-left: 5px solid #ccc;
+      position: absolute;
+      right: 0;
+    }
+
+    #pie1, #pie2 {
+      width: 100%;
+      height: 300px;
+      margin-top: 2em;
+    }
+
+    #map {
+      height: 100%;
+    }
+    #top li {
+      list-style: none;
+      display: inline-block;
+      font-weight: bold;
+      font-size: 16px;
+      margin-left: 3em;
+    }
+    #top #nav {
+      float: left;
+      margin-top: 21px;
+    }
+    #top h2 {
+      float: left;
+      margin: 10px 100px;
+      margin-right: 50px;
+      line-height: 2em;
+    }
+    #top #logo {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="top">
+    <h2>华电香港公司数据可视化系统</h2>
+    <img src="#" alt="" id="logo" width="60" height="60" style="background-color: #0c88e8;">
+    <div id="nav">
+      <ul>
+        <li><a href="index.html">首页</a></li>
+        <li><a href="country.html">国家信息</a></li>
+        <li><a href="project.html">项目信息</a></li>
+        <li>报告</li>
+        <li>系统设置</li>
+      </ul>
+    </div>
+  </div>
+  <div id="left">
+    <h3>中国</h3>
+    <p>中国，是以华夏文明为源泉、中华文化为基础，并以汉族为主体民族的多民族国家，通用汉语、汉字，汉族与少数民族被统称为“中华民族”，又自称为炎黄子孙、龙的传人。</p>
+    <h4>地理位置</h4>
+    <p>陆地面积960万平方公里，领海约470万平方公里</p>
+    <h4>经济</h4>
+    <p>1980年代以来，邓小平政府宣布改革开放，开始实行社会主义市场经济并推行经济体制改革。中国大陆近年至2010年，GDP超过72000亿美元，已经成为美国之后的世界第二经济大国，普遍认为中国目前仍然是世界上发展速度最快的经济体，但是人均国民生产总值仍位于世界中等水平（第89位），并逐渐受到资源限制和贫富差距加大的制约。中华人民共和国省份中，广东为GDP最高的第一强省，浙江为人均收入最高的第一富省。中国大陆、香港、澳门、台湾之间的经济联系在全球化的过程中日益紧密。</p>
+
+    <!-- <div id="pie1"></div>
+    <div id="pie2"></div> -->
+  </div>
+  <!-- <div id="right">
+    <h2>总体的介绍信息:</h2>
+    <div id="pie1"></div>
+    <div id="pie2"></div>
+  </div> -->
+
+    <div class="rightnav">
+    <div class="righttop">概况</div>
+    <div class="rightarea">
+      <div class="bor-top">
+        <div class="statname">电站数量(座)</div>
+        <div class="statlist">
+          <div class="h100 w50 fl" id="dzsl"></div>
+          <div class="h100 w50 fl">
+            <div class="h100 mt10 fl mainright-smail">
+              <dl class="rightdl">
+                <dd>
+                  <a class="i1"></a>
+                  <div class="ti">
+                    已投运
+                  </div>
+                  <div class="val" id="tysl">16座电站</div>
+                </dd>
+                <dd class="">
+                  <a class="i2"></a>
+                  <div class="ti">
+                    在建
+                  </div>
+                  <div class="val" id="zjsl">16座电站</div>
+                </dd>
+                <dd class="">
+                  <a class="i3" style='width:20px!important;'></a>
+                  <div class="ti">
+                    计划
+                  </div>
+                  <div class="val" id="jhsl">16座电站</div>
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <div class="statname">电站容量(MW)</div>
+        <div class="statlist">
+          <div class="h100 w50 fl" id="dzrl"></div>
+          <div class="h100 w50 fl">
+            <div class="h100 mt10 fl">
+              <dl class="rightdl">
+                <dd class="">
+                  <a class="i1"></a>
+                  <div class="ti">
+                    已投运
+                  </div>
+                  <div class="val" id="tyrl">260</div>
+                </dd>
+                <dd class="">
+                  <a class="i2"></a>
+                  <div class="ti">
+                    在建
+                  </div>
+                  <div class="val" id="zjrl">260</div>
+                </dd>
+                <dd class="">
+                  <a class="i3" style='width: 20px!important;'></a>
+                  <div class="ti">
+                    计划
+                  </div>
+                  <div class="val" id="jhrl">260</div>
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cler"> </div>
+      <div class="bor-top">
+        <div class="statname" style="float:left;border-bottom:0;height: 30px;line-height: 30px;padding: 6px 20px 0;">安全运行天数(天)</div><span class="statnum" id="aqyxts" style="float:left;padding-top: 6px;height: 30px;line-height: 30px;"></span>
+
+        <div class="statname" style="float:left;border-bottom:0;height: 40px;line-height: 40px;padding: 0 20px;">累计收益(元)</div><span class="statnum" id="ljsy" style="float:left;"></span>
+
+      </div>
+      <div class="cler"> </div>
+      <div class="bor-top">
+        <div class="statname">光储充概况(<span id="gccgkdw">MW</span>)</div>
+        <div class="statlist">
+          <ul>
+            <li>
+              <i class="i1"></i>
+              <span class="nam">光伏功率</span>
+              <span class="va" id="gfgl">2680</span>
+            </li>
+            <li>
+              <i class="i2"></i>
+              <span class="nam">储能功率</span>
+              <span class="va" id="cngl">2680</span>
+            </li>
+            <li>
+              <i class="i3"></i>
+              <span class="nam">充电功率</span>
+              <span class="va" id="cdgl">2680</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="bor-top">
+        <div class="statname">社会贡献</div>
+        <div class="statlist">
+          <ul>
+            <li>
+              <i class="i4"></i>
+              <span class="nam">等效植树</span>
+              <span class="va" id="dxzs">260棵</span>
+            </li>
+            <li>
+              <i class="i5"></i>
+              <span class="nam">二氧化碳</span>
+              <span class="va" id="eyht">260吨</span>
+            </li>
+            <li>
+              <i class="i6"></i>
+              <span class="nam">节约标煤</span>
+              <span class="va" id="jybm">260吨</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <span class="openbut2 rg-zk" id="rg-openbut"></span>
+  </div>
+  <div id="map"></div>
+  <script>
+    // var map = new BMap.Map('map', {minZoom: 4, maxZoom:8});
+    var map = new BMap.Map('map', {maxZoom:8});
+    var point = new BMap.Point(31.588131,39.274645);
+    map.centerAndZoom(point, 3);
+
+    map.enableKeyboard();
+    map.enableScrollWheelZoom();
+    map.disableDoubleClickZoom();
+
+    // 限制视口拖动边界，然而该怎么设置西南和东北的坐标点才可以正常
+    // var b = new BMap.Bounds(new BMap.Point(179.708763,-80.776288),new BMap.Point(279.855941,84.594098));
+  	// try {
+  	// 	BMapLib.AreaRestriction.setBounds(map, b);
+  	// } catch (e) {
+  	// 	alert(e);
+  	// }
+
+    // 缩略图控件
+    var overView = new BMap.OverviewMapControl();
+    var overViewOpen = new BMap.OverviewMapControl({isOpen: true, offset: new BMap.Size(1100, 100)});
+
+    map.addControl(overView);
+    map.addControl(overViewOpen);
+
+
+    map.addEventListener('click', function(e) {
+      $('#left').toggle();
+      // console.log(e.point.lng + ',' + e.point.lat);
+      // // alert('点击坐标：' + e.pixel.x + ',' + e.pixel.y);
+
+      // var gps = {};
+      // gps = bd09_to_wgs84(e.point.lat, e.point.lng)
+      // // console.log('gps84 : ' + gps.lon + ',' + gps.lat);
+
+      // var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' +
+      //   gps.lon + ',' + gps.lat +
+      //   '&key=AIzaSyAOMkLzEI9T3yPXQ1xutZFjNyhOUIr4V6E';
+      // $.get(url, function(data) {
+      //   console.log(data);
+      //   var opt = {
+      //     width: 400,
+      //     height: 200,
+      //     title: '这位置是：',
+      //     enableMessage: true,
+      //     message: '亲爱滴，今晚去哪里吃饭？'
+      //   }
+      //   var results = data.results;
+      //   var content = '<p>地址：<a href="https://www.baidu.com">百度大厦</a></p><p> 国家: ' + results[results.length - 1].formatted_address + '</p>';
+
+
+      //   var infoWindow = new BMap.InfoWindow(content, opt);
+      //   infoWindow.enableAutoPan();
+
+      //   map.openInfoWindow(infoWindow, e.point)
+      // });
+    });
+
+    // 缩略图控件
+
+
+    // 在新窗口打开 url
+    function openwin(url) {
+      var a = document.createElement("a"); //创建a对象
+      a.setAttribute("href", url);
+      a.setAttribute("target", "_blank");
+      a.setAttribute("id", "camnpr");
+      document.body.appendChild(a);
+      a.click(); //执行当前对象
+      document.body.removeChild(a);
+    }
+    // 在新窗口打开 url
+
+    map.addEventListener('dblclick', function(e) {
+      var gps = {};
+      gps = bd09_to_wgs84(e.point.lat, e.point.lng)
+      // console.log('gps84 : ' + gps.lon + ',' + gps.lat);
+
+      var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' +
+        gps.lon + ',' + gps.lat +
+        '&key=AIzaSyAOMkLzEI9T3yPXQ1xutZFjNyhOUIr4V6E';
+      $.get(url, function(data) {
+        var results = data.results;
+        var country = results[results.length - 1].formatted_address;
+        var uri = 'http://localhost/w/map/v3/country.html?cn=' + encodeURIComponent(country) +
+          '&pt=' + gps.lon + ',' + gps.lat;
+        openwin(uri);
+      })
+    });
+
+    // var MAX = 5;
+    // var markers = [];
+    // var pt = null;
+    // var i = 0;
+    // for (; i < MAX; i++) {
+    //    pt = new BMap.Point(Math.random() * 40 + 85, Math.random() * 30 + 21);
+    //    markers.push(new BMap.Marker(pt));
+    // }
+    // //最简单的用法，生成一个marker数组，然后调用markerClusterer类即可。
+    // var markerClusterer = new BMapLib.MarkerClusterer(map, {markers:markers});
+
+    // ============marker1==============
+    var p1 = new BMap.Point(98.176572,37.802628);
+    // var p2 = new BMap.Point(108.33188,28.537776);
+    // var p3 = new BMap.Point(119.958971,29.829364);
+    var opts1 = { width: 300 };
+    var content1 = '<h4>华电香港项目三</h4><p>该项目是华电香港公司在境外投资的第三家公司。该项目是水利发电项目。项目位于xxx国家的xxx省。</p>';;
+    var infoWindow1 = new BMap.InfoWindow( content1, opts1 );
+
+    var marker1 = new BMap.Marker(p1);
+    marker1.addEventListener('mouseover', function(){
+      marker1.openInfoWindow(infoWindow1);
+    });
+    marker1.addEventListener('mouseout', function(){
+      marker1.closeInfoWindow(infoWindow1);
+    });
+    marker1.addEventListener('dblclick', function(){
+      openwin('http://localhost/w/map/v3/project.html');
+    });
+    map.addOverlay(marker1);
+    // map.setViewport();
+
+
+    // ============marker1==============
+    // ============marker2==============
+    var p2 = new BMap.Point(-107.936968,50.518463);
+    // var p2 = new BMap.Point(108.33188,28.537776);
+    // var p3 = new BMap.Point(119.958971,29.829364);
+    var opts2 = { width: 300 };
+    var content2 = '<h4>华电香港项目一</h4><p>该项目是华电香港公司在境外投资的第一家公司。该项目是水利发电项目。项目位于xxx国家的xxx省。</p>';
+    var infoWindow2 = new BMap.InfoWindow( content2, opts2 );
+
+    var marker2 = new BMap.Marker(p2);
+    marker2.addEventListener('mouseover', function(){
+      marker2.openInfoWindow(infoWindow2);
+    });
+    marker2.addEventListener('mouseout', function(){
+      marker2.closeInfoWindow(infoWindow2);
+    });
+    marker2.addEventListener('dblclick', function(){
+      openwin('http://localhost/w/map/v3/project.html');
+    });
+    map.addOverlay(marker2);
+    // map.setViewport();
+
+
+    // ============marker2==============
+
+    // ============marker3==============
+    var p3 = new BMap.Point(8.039591,16.781601);
+    // var p2 = new BMap.Point(108.33188,28.537776);
+    // var p3 = new BMap.Point(119.958971,29.829364);
+    var opts3 = { width: 300 };
+    var content3 = '<h4>华电香港项目二</h4><p>该项目是华电香港公司在境外投资的第二家公司。该项目是水利发电项目。项目位于xxx国家的xxx省。</p>';
+    var infoWindow3 = new BMap.InfoWindow( content3, opts3 );
+
+    var marker3 = new BMap.Marker(p3);
+    marker3.addEventListener('mouseover', function(){
+      marker3.openInfoWindow(infoWindow3);
+    });
+    marker3.addEventListener('mouseout', function(){
+      marker3.closeInfoWindow(infoWindow3);
+    });
+    marker3.addEventListener('dblclick', function(){
+      openwin('http://localhost/w/map/v3/project.html');
+    });
+    map.addOverlay(marker3);
+    // map.setViewport();
+
+
+    // ============marker3==============
+
+    // ============echarts=============
+    
+        $(function() {
+      var placeHolderStyle = {
+        normal: {
+          color: '#3285FF'
+        }
+      }
+      var placeHolderStyle1 = {
+        normal: {
+          color: '#F1B101'
+        }
+      }
+      var placeHolderStyle2 = {
+        normal: {
+          color: '#F54336'
+        }
+      }
+
+      var serData = [];
+      serData.push({
+        value: 12,
+        name: '已投运',
+        itemStyle: placeHolderStyle2
+      });
+      serData.push({
+        value: 8,
+        name: '在建',
+        itemStyle: placeHolderStyle1
+      });
+      serData.push({
+        value: 90,
+        name: '计划',
+        itemStyle: placeHolderStyle
+      });
+
+      var serData2 = [];
+      serData2.push({
+        value: 35.36,
+        name: '已投运',
+        itemStyle: placeHolderStyle2
+      });
+      serData2.push({
+        value: 80.36,
+        name: '在建',
+        itemStyle: placeHolderStyle1
+      });
+      serData2.push({
+        value: 96.32,
+        name: '计划',
+        itemStyle: placeHolderStyle
+      });
+
+
+      var zrl = 206.36;
+      var zsl = 35;
+
+
+      chart(serData, zsl);
+      chart1(serData2, zrl);
+    })
+
+    function chart(serData, zsl) {
+
+      var myChart5 = echarts.init(document.getElementById('dzsl'), 'shine');
+      var option5 = {
+        title: {
+          text: zsl,
+          x: 'center',
+          y: 'center',
+          itemGap: 15,
+          textStyle: {
+            color: 'rgba(0,0,0,0.8)',
+            fontSize: 14
+          },
+          subtextStyle: {
+            fontSize: 14
+          }
+        },
+        series: [{
+          name: '电站数量',
+          type: 'pie',
+          radius: ['65%', '75%'],
+          itemStyle: {
+            normal: {
+              label: {
+                show: false
+              },
+              labelLine: {
+                show: false
+              }
+            }
+          },
+          data: serData
+        }]
+      };
+      myChart5.setOption(option5);
+      ////////////////////////////////////////////////////////////
+    }
+
+    function chart1(serData, zrl) {
+      var myChart6 = echarts.init(document.getElementById('dzrl'), 'shine');
+      var option5 = {
+        title: {
+          text: zrl,
+          x: 'center',
+          y: 'center',
+          itemGap: 15,
+          textStyle: {
+            color: 'rgba(0,0,0,0.8)',
+            fontSize: 14
+          },
+          subtextStyle: {
+            fontSize: 14
+          }
+        },
+        series: [{
+          name: '电站容量',
+          type: 'pie',
+          radius: ['65%', '75%'],
+          itemStyle: {
+            normal: {
+              label: {
+                show: false
+              },
+              labelLine: {
+                show: false
+              }
+            }
+          },
+          data: serData
+        }]
+      };
+      myChart6.setOption(option5);
+      ////////////////////////////////////////////////////////////
+    }
+
+    // ============echarts=============
+  </script>
+</body>
+
+</html>

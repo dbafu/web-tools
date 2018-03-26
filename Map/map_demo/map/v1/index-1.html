@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>country</title>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=bGyuijx9cw14u5H686FY9TD2ehzqsSWe"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+
+  <style media="screen">
+    #map {
+      width: 800px;
+      height: 600px;
+      border: 1px solid #f00;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    #main {
+      height: 800px;
+      border: 1px solid #0f0;
+      position: absolute;
+      left: 800px;
+      top: 0;
+      right: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div id="main"></div>
+  <script type="text/javascript">
+    var lng_lat = location.href.split('=')[2].split(',');
+    var map = new BMap.Map('map', {minZoom: 3, maxZoom: 10})
+    var point = new BMap.Point( lng_lat[0], lng_lat[1]);
+    map.centerAndZoom(point, 5);
+
+    map.enableKeyboard();
+    map.enableScrollWheelZoom();
+    map.disableDoubleClickZoom();
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>项目信息</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #top {
+      width: 100%;
+      height: 72px;
+      margin: 0 auto;
+      border-bottom: 1px solid #000;
+      position: relative;
+      left: 0;
+      top: 0;
+      background: #eee;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #left {
+      top: 101px;
+      border-right: 1px solid #ccc;
+      left: 0;
+      width: 220px;
+      background: #fff;
+      /*padding: 1em 0;*/
+      /*display: none;*/
+    }
+
+    #top li {
+      list-style: none;
+      display: inline-block;
+      font-weight: bold;
+      font-size: 16px;
+      margin-left: 3em;
+    }
+    #top #nav {
+      float: left;
+      margin-top: 21px;
+    }
+    #top h2 {
+      float: left;
+      margin: 24px 100px;
+      margin-right: 50px;
+      line-height: 2em;
+    }
+    #top #logo {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+    }
+
+    #cnt {
+    	width: 220px;
+    	height: 220px;
+    	overflow: hidden;
+    }
+
+    #main {
+    	position: absolute;
+    	left: 221px;
+    	top: 72px;
+    	width: 800px;
+    	padding: 1em;
+    	text-indent: 1.5em;
+    	padding-bottom: 2em;
+    	border: 1px solid #000;
+    }
+
+    table{
+    	width: 90%;
+    	border: 1px solid #000;
+    	border-collapse: collapse;
+      margin-left: 28px;
+
+    }
+    table td {
+    	border: 1px solid #000;
+    	text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="top">
+    <h2>华电香港公司数据可视化系统</h2>
+    <img src="#" alt="" id="logo" width="60" height="60" style="background-color: #0c88e8;">
+    <div id="nav">
+      <ul>
+        <li><a href="index.html">首页</a></li>
+        <li><a href="country.html">国家信息</a></li>
+        <li><a href="project.html">项目信息</a></li>
+        <li>报告</li>
+        <li>系统设置</li>
+      </ul>
+    </div>
+  </div>
+
+	<div id="left">
+		<div id="cnt">
+			<img src="u218.png" alt="" width="220" height="220">
+		</div>
+	</div>
+	<div id="main">
+    <h1>华电项目一</h1>
+		<h2>项目简要</h2> 
+		<p>本项目位于     ，规划装机    万千瓦（    ×    万千瓦）。本期总装机    万千瓦，安装机组    台。</p>
+    <p>电站采用   开发，多年平均发电量     亿千瓦时，年利用小时数     小时。</p>
+    <p>计划建设进度：    年     月开工，     年     月投产。</p>
+ 		<h3>项目描述</h3>
+    <p><img src="" alt="项目描述" width="100" height="100" style="margin-left: 10px"></p>
+ 		<p>位于中国河北省内。坐标xxxxxx。</p>
+ 		<h3>项目进度</h3>
+ 		<p>按       年    月价格水平估算，本项目：</p>
+		<p静态总投资   万元，静态单位千瓦投资   元，单位电能投资   元；</p>
+		<p>动态总投资   万元，动态单位千瓦投资   元，单位电能投资   元。</p>
+		<p>建设期贷款利息           万元。</p>
+		<p>与项目所在国同类项目投资水平比，低或高的主要原因。</p>
+    <img src="u222.png" alt=""  style="margin-left: 30px">
+		<h3>项目文件</h3>
+		<table>
+			<tr>
+				<td>序号</td>
+				<td>文件名</td>
+				<td>操作</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>文件一</td>
+				<td>查看</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>文件二</td>
+				<td>查看</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>文件三</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>文件四</td>
+				<td>查看</td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>文件五</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td>文件六</td>
+				<td></td>
+			</tr>
+		</table>
+	</div>
+
+	<script type="text/javascript">
+  		window.onload = function() {
+  			// var div = document.getElementById('map');
+  			var country = location.href.split('=')[1];
+  			var cn_coun = decodeURIComponent(country);
+  			cn_coun = cn_coun.split('&')[0];
+  			// document.title = cn_coun;
+  			var lng_lat = location.href.split('=')[2].split(',');
+  			console.log(lng_lat);
+	
+	
+  			var map = new BMap.Map('map');
+  			var point = new BMap.Point(parseFloat(lng_lat[1]), parseFloat(lng_lat[0]));
+  			if (cn_coun === '俄罗斯') {
+  			    map.centerAndZoom(point, 1);
+  			} else {
+  			    map.centerAndZoom(point, 3);
+  			}
+  			// map.centerAndZoom(cn_coun.split('&')[0], 6);
+  			    map.enableKeyboard();
+		    map.enableScrollWheelZoom();
+		    map.disableDoubleClickZoom();
+  			// console.log(cn_coun);
+  			// div.innerText = 'hello : ' + cn_coun;
+  			$('#tab1').click(function(){
+  				$('#cnt2').hide();
+  				$('#map').show();
+  			});
+  			$('#tab2').click(function(){
+  				$('#map').hide();
+  				$('#cnt2').show();
+  			});
+    	}
+    </script>
+    <script src="jquery.js"></script>	
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=bGyuijx9cw14u5H686FY9TD2ehzqsSWe"></script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>国家主页</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #top {
+      width: 100%;
+      height: 72px;
+      margin: 0 auto;
+      border-bottom: 1px solid #000;
+      position: relative;
+      left: 0;
+      top: 0;
+      background: #eee;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #left {
+      top: 101px;
+      border-right: 1px solid #ccc;
+      left: 0;
+      width: 220px;
+      background: #fff;
+      padding: 1em 0;
+      /*display: none;*/
+    }
+
+    #left h2 {
+      text-align: center;
+    }
+
+    #left p {
+      text-indent: 1.5em;
+      font-size: 12px;
+    }
+
+    #left h3 {
+      height: 30px;
+      line-height: 30px;
+      background-color: #3285FF;
+      font-size: 16px;
+      text-indent: 1.5em;
+      color: #fff;
+      margin-bottom: 1em;
+    }
+
+    #left h4 {
+      padding: 5px 20px;
+      width: 35%;
+      border-bottom: 1px solid #ccc;
+      color: #3285F3;
+      margin-left: 10px;
+      margin-bottom: 1em;
+    }
+    #left p {
+      padding-left: 1.5em;
+      padding-right: 1em;
+
+    }
+
+    #map, #cnt2 {
+      height: 210px;
+      width: 210px;
+    }
+    #top li {
+      list-style: none;
+      display: inline-block;
+      font-weight: bold;
+      font-size: 16px;
+      margin-left: 3em;
+    }
+    #top #nav {
+      float: left;
+      margin-top: 21px;
+    }
+    #top h2 {
+      float: left;
+      margin: 24px 100px;
+      margin-right: 50px;
+      line-height: 2em;
+    }
+    #top #logo {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+    }
+
+    #tab {
+    	margin-left: 30px;
+    }
+
+    #tab div {
+    	display: inline-block;
+    	width: 65px;
+    	height: 40px;
+    	text-align: center;
+    	line-height: 40px;
+    	border:1px solid rgba(121, 121, 121, 1);
+    }
+    #tab1, #tab2 {
+		border-radius: 5px;
+    }
+
+    #cnt {
+    	width: 210px;
+    	height: 210px;
+    	margin-left: 5px;
+    	border:1px solid rgba(121, 121, 121, 1);
+    	overflow: hidden;
+    }
+
+    #cnt2 {
+    	background-image: url(dw.gif);
+    }
+
+    #main {
+    	position: absolute;
+    	left: 221px;
+    	top: 72px;
+    	width: 800px;
+    	padding: 1em;
+    	text-indent: 1.5em;
+    	padding-bottom: 2em;
+    	border: 1px solid #000;
+    }
+
+    table{
+    	width: 100%;
+    	border: 1px solid #000;
+    	border-collapse: collapse;
+    }
+    table td {
+    	border: 1px solid #000;
+    	border-collapse: collapse;
+    	text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="top">
+    <h2>华电香港公司数据可视化系统</h2>
+    <img src="#" alt="" id="logo" width="60" height="60" style="background-color: #0c88e8;">
+    <div id="nav">
+      <ul>
+        <li><a href="index.html">首页</a></li>
+        <li><a href="country.html">国家信息</a></li>
+        <li><a href="project.html">项目信息</a></li>
+        <li>报告</li>
+        <li>系统设置</li>
+      </ul>
+    </div>
+  </div>
+
+	<div id="left">
+		<div id="tab">
+			<div id="tab1">Map</div><div id="tab2">电网</div>
+		</div>
+		<div id="cnt">
+			<div id="map"></div>
+			<div id="cnt2" style="display: none;"></div>
+		</div>
+	</div>
+	<div id="main">
+		<h2>中国</h2> 
+		<p>中国，是以华夏文明为源泉、中华文化为基础，并以汉族为主体民族的多民族国家，通用汉语、汉字，汉族与少数民族被统称为“中华民族”，又自称为炎黄子孙、龙的传人。</p>
+		<p>中国是世界四大文明古国之一，有着悠久的历史，距今约5000年前，以中原地区为中心开始出现聚落组织进而形成国家，后历经多次民族交融和朝代更迭，直至形成多民族国家的大一统局面。20世纪初p辛亥革命后，君主政体退出历史舞台，共和政体建立。1949年中华人民共和国成立后，在中国大陆建立了人民代表大会制度的政体。</p>
+		<p>中国疆域辽阔、民族众多，先秦时期的华夏族在中原地区繁衍生息，到了汉代通过文化交融使汉族正式成型，奠定了中国主体民族的基础。后又通过与周边民族的交融，逐步形成统一多民族国家的局面，而人口也不断攀升，宋代中国人口突破一亿，清朝时期人口突破四亿，到2005年中国人口已突破十三亿。</p>
+		<p>中国文化渊远流长、博大精深、绚烂多彩，是东亚文化圈的文化宗主国，在世界文化体系内占有重要地位，由于各地的地理位置、自然条件的差异，人文、经济方面也各有特点。传统文化艺术形式有诗词、戏曲、书法、国画等，而春节、元宵、清明、端午、中秋、重阳等则是中国重要的传统节日。[1-7]</p>
+ 		<h3>人口</h3>
+ 		<p>全国12亿人口。以汉族居多。</p>
+ 		<h3>经济</h3>
+ 		<p>古代中国有着发达的农业经济，其经济规模在很长一段历史时期内领先于世界。在历史上由于自然环境的变化和战争等人为因素的影响，古代中国的经济通常与王朝的兴衰与更替具有相同的周期。</p>
+		<p>明（明朝前期实施海禁，后来隆庆开关，允许民间私人远贩东西二洋）清以来，中国固守农业经济，而西方世界在同一时期率先实现了工业革命，中国经济遂落后于西方。自鸦片战争以来，中国原来保守的农业经济体系受到了西方世界的极大挑战。</p>
+		<p>中国效仿西方发展工业的过程，于中华民国国民政府成立后至中日战争开战前夕已顺畅发展，尽管其间受到内外因素的多重干扰。尔后直至中日战争和国共战争的结束，中国始有较为长期的和平发展时期。</p>
+		<p>1980年代以来，邓小平政府宣布改革开放，开始实行社会主义市场经济并推行经济体制改革。中国大陆近年至2010年，GDP超过72000亿美元，已经成为美国之后的世界第二经济大国，普遍认为中国目前仍然是世界上发展速度最快的经济体，但是人均国民生产总值仍位于世界中等水平（第89位），并逐渐受到资源限制和贫富差距加大的制约。中华人民共和国省份中，广东为GDP最高的第一强省，浙江为人均收入最高的第一富省。</p>
+		<p>中国大陆、香港、澳门、台湾之间的经济联系在全球化的过程中日益紧密。</p>
+		<h3>文件</h3>
+		<table>
+			<tr>
+				<td>序号</td>
+				<td>文件名</td>
+				<td>操作</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>文件一</td>
+				<td>查看</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>文件二</td>
+				<td>查看</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>文件三</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>文件四</td>
+				<td>查看</td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>文件五</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td>文件六</td>
+				<td></td>
+			</tr>
+		</table>
+	</div>
+
+	<script type="text/javascript">
+  		window.onload = function() {
+  			// var div = document.getElementById('map');
+  			var country = location.href.split('=')[1];
+  			var cn_coun = decodeURIComponent(country);
+  			cn_coun = cn_coun.split('&')[0];
+  			// document.title = cn_coun;
+  			var lng_lat = location.href.split('=')[2].split(',');
+  			console.log(lng_lat);
+	
+	
+  			var map = new BMap.Map('map');
+  			var point = new BMap.Point(parseFloat(lng_lat[1]), parseFloat(lng_lat[0]));
+  			if (cn_coun === '俄罗斯') {
+  			    map.centerAndZoom(point, 1);
+  			} else {
+  			    map.centerAndZoom(point, 3);
+  			}
+  			// map.centerAndZoom(cn_coun.split('&')[0], 6);
+  			    map.enableKeyboard();
+		    map.enableScrollWheelZoom();
+		    map.disableDoubleClickZoom();
+  			// console.log(cn_coun);
+  			// div.innerText = 'hello : ' + cn_coun;
+  			$('#tab1').click(function(){
+  				$('#cnt2').hide();
+  				$('#map').show();
+  			});
+  			$('#tab2').click(function(){
+  				$('#map').hide();
+  				$('#cnt2').show();
+  			});
+    	}
+    </script>
+    <script src="jquery.js"></script>	
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=bGyuijx9cw14u5H686FY9TD2ehzqsSWe"></script>
+</body>
+</html>
